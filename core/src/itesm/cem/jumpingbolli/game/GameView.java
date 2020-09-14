@@ -1,20 +1,22 @@
-package itesm.cem.jumpingbolli;
+package itesm.cem.jumpingbolli.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Align;
+
+import itesm.cem.jumpingbolli.GdXGame;
+import itesm.cem.jumpingbolli.Pantalla;
+import itesm.cem.jumpingbolli.button.ButtonFactory;
+import itesm.cem.jumpingbolli.button.GameButton;
+import itesm.cem.jumpingbolli.menu.MenuView;
 
 public class GameView extends Pantalla {
 
-  MainGame game;
   private Stage gameStage;
-  ButtonFactory buttonFactory;
 
 
-  public GameView(MainGame game) {
+  public GameView(GdXGame game) {
     super(game);
   }
 
@@ -23,25 +25,11 @@ public class GameView extends Pantalla {
   public void show() {
     gameStage = new Stage(super.viewport);
 
-    ImageButton btnReturn = new GameButton("buttons/btnReturn.png");
-    btnReturn.setPosition(ANCHO_PANTALLA / 2, ALTO_PANTALLA / 2, Align.center);
-    btnReturn.addListener(new ClickListener() {
-      @Override
-      public void clicked(InputEvent event, float x, float y) {
-        super.clicked(event, x, y);
-        game.setScreen(new MenuView(game));
-      }
-    });
-    gameStage.addActor(buttonFactory.getOnGameConfigBtn());
-
-    gameStage.addActor(btnReturn);
+    gameStage.addActor(ButtonFactory.getReturnBtn(game, new MenuView(game)));
 
     ImageButton btnAjustes = new GameButton("buttons/ajustes.png");
     btnAjustes.setPosition(ANCHO_PANTALLA - btnAjustes.getWidth() * 1.5f, ALTO_PANTALLA - btnAjustes.getHeight() * 1.5f);
     gameStage.addActor(btnAjustes);
-
-
-
     Gdx.input.setInputProcessor(gameStage);
 
   }
@@ -51,6 +39,7 @@ public class GameView extends Pantalla {
     cleanScreen();
     batch.setProjectionMatrix(camera.combined);
     batch.begin();
+    batch.draw(new Texture("fondos/Nivel1.jpeg"), 0, 0);
     batch.end();
     gameStage.draw();
   }
@@ -67,6 +56,5 @@ public class GameView extends Pantalla {
 
   @Override
   public void dispose() {
-
   }
 }

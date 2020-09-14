@@ -17,16 +17,15 @@ public abstract class Pantalla implements Screen {
     protected OrthographicCamera camera;
     protected Viewport viewport;
     protected SpriteBatch batch;
-    protected MainGame game;
-    protected ButtonFactory btnFactory;
+    protected GdXGame game;
 
-    public Pantalla(MainGame game) {
+    public Pantalla(GdXGame game) {
         camera = new OrthographicCamera();
         camera.position.set(ANCHO_PANTALLA / 2, ALTO_PANTALLA / 2, 0);
         camera.update();
         viewport = new StretchViewport(ANCHO_PANTALLA, ALTO_PANTALLA, camera);
         batch = new SpriteBatch();
-        btnFactory = new ButtonFactory(game);
+        this.game = game;
 
     }
 

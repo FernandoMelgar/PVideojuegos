@@ -1,7 +1,13 @@
-package itesm.cem.jumpingbolli;
+package itesm.cem.jumpingbolli.about;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import itesm.cem.jumpingbolli.GdXGame;
+import itesm.cem.jumpingbolli.Pantalla;
+import itesm.cem.jumpingbolli.button.ButtonFactory;
+import itesm.cem.jumpingbolli.menu.MenuView;
 
 public class AboutView extends Pantalla {
 
@@ -9,14 +15,15 @@ public class AboutView extends Pantalla {
   BitmapFont font = new BitmapFont();
 
 
-  public AboutView(MainGame game) {
+  public AboutView(GdXGame game) {
     super(game);
   }
 
   @Override
   public void show() {
     stage = new Stage(super.viewport);
-
+    stage.addActor(ButtonFactory.getReturnBtn(game, new MenuView(game)));
+    Gdx.input.setInputProcessor(stage);
   }
 
   @Override
@@ -24,9 +31,10 @@ public class AboutView extends Pantalla {
     cleanScreen();
     batch.setProjectionMatrix(camera.combined);
     batch.begin();
-    font.draw(batch, "Fernando Melgar \n Alex Leyva \n Arturo Marquez \n Claudio Mayoral", ANCHO_PANTALLA / 2f, ALTO_PANTALLA /2f);
+    batch.draw(new Texture("fondos/PrototipoAbout.png"), 0, 0);
     batch.end();
     stage.draw();
+
   }
 
   @Override
@@ -41,6 +49,5 @@ public class AboutView extends Pantalla {
 
   @Override
   public void dispose() {
-
   }
 }

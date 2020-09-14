@@ -1,10 +1,10 @@
-package itesm.cem.jumpingbolli;
+package itesm.cem.jumpingbolli.button;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-class GameButton extends ImageButton {
+public class GameButton extends ImageButton {
 
   public GameButton(String pathUp, String pathDown) {
     super(new TextureRegionDrawable(new Texture(pathUp)), new TextureRegionDrawable(new Texture(pathDown)));

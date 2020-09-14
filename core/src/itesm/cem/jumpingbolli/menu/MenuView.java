@@ -1,4 +1,4 @@
-package itesm.cem.jumpingbolli;
+package itesm.cem.jumpingbolli.menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -6,16 +6,24 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.utils.Align;
 
+import itesm.cem.jumpingbolli.SkinsView;
+import itesm.cem.jumpingbolli.about.AboutView;
+import itesm.cem.jumpingbolli.button.ButtonFactory;
+import itesm.cem.jumpingbolli.button.GameButton;
+import itesm.cem.jumpingbolli.configuration.ConfigurationView;
+import itesm.cem.jumpingbolli.game.GameView;
+import itesm.cem.jumpingbolli.GdXGame;
+import itesm.cem.jumpingbolli.Pantalla;
+
 public class MenuView extends Pantalla {
 
 
   private Stage menuStage;
 
 
-  public MenuView(MainGame mainGame) {
+  public MenuView(GdXGame mainGame) {
     super(mainGame);
-    game = mainGame;
-    btnFactory = new ButtonFactory(game);
+//    game = mainGame;
   }
 
   @Override
@@ -34,11 +42,11 @@ public class MenuView extends Pantalla {
   }
 
   private void createMenu() {
-    menuStage.addActor(btnFactory.getPlayBtn(new GameView(game)));
-    menuStage.addActor(btnFactory.getHowToBtn());
-    menuStage.addActor(btnFactory.getAboutBtn(new AboutView(game)));
-    menuStage.addActor(btnFactory.getSkinsBtn());
-    menuStage.addActor(btnFactory.getConfigurationBtn());
+    menuStage.addActor(ButtonFactory.getPlayBtn(game,  new GameView(game)));
+    menuStage.addActor(ButtonFactory.getHowToBtn(game, new GameView(game)));
+    menuStage.addActor(ButtonFactory.getAboutBtn(game, new AboutView(game)));
+    menuStage.addActor(ButtonFactory.getSkinsBtn(game, new SkinsView(game)));
+    menuStage.addActor(ButtonFactory.getConfigurationBtn(game, new ConfigurationView(game)));
   }
 
   @Override
